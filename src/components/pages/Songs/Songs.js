@@ -38,12 +38,12 @@ function Songs() {
                 <iframe
                   title={song.name}
                   src={song.url}
-                  width="100%"
-                  height="300"
-                  scrolling="no"
-                  frameBorder="no"
-                  allow="autoplay"
-                />
+                  width="300"
+                  height="380"
+                  frameBorder="0"
+                  allowTransparency="true"
+                  allow="encrypted-media"
+                ></iframe>
               </div>
             ))
           )}
@@ -54,3 +54,5 @@ function Songs() {
 }
 
 export default Songs;
+
+// https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/558742164&color=%23585858&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true
