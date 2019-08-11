@@ -1,0 +1,11 @@
+.card {
+  background-color: #212121;
+  color: #fafafa;
+}
+.btn-floating.halfway-fab {
+  background-color: #3b5998;
+}
+.fa-facebook-square {
+  font-size: 0.8em;
+  margin-top: 25%;
+}

@@ -1,0 +1,24 @@
+.Footer {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+}
+
+.row {
+  margin-bottom: 0px;
+}
+
+.privacy-and-rights, .privacy-and-rights a{
+  font-size: 14px !important;
+  color: #fafafa !important;
+}
+
+.privacy-and-rights span {
+  margin-right: 12px;
+}
+
+.privacy-and-rights a {
+  margin-left: 12px;
+}

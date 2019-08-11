@@ -1,0 +1,26 @@
+.merch-details .size-input {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.merch-details .size-label {
+  padding-left: 23px !important;
+  color: #212121;
+}
+
+.merch-details .btn-floating.halfway-fab {
+  background-color: #fafafa;
+}
+
+.merch-details [type="radio"]:checked+span:after {
+  background-color: #212121;
+  border-color: #212121;
+}
+
+.merch-details .size-checkbox {
+  margin-left: 1rem !important;
+}
+
+.merch-details .fa-cart-plus {
+  margin-right: 1rem;
+}

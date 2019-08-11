@@ -1,0 +1,29 @@
+.fixed-action-btn {
+  top: 85%;
+}
+
+.fa-instagram {
+  color: #ff7700 !important;
+}
+
+.fa-facebook-f {
+  color: #3b5998 !important;
+}
+
+.fa-youtube {
+  color: #ff0000 !important;
+}
+
+.fa-soundcloud {
+  color: #ff7700 !important;
+}
+
+.media-icon {
+  margin-top: 9px;
+  font-size: 2.5vh;
+  color: #fafafa;
+}
+
+.btn-floating {
+  background-color: #fafafa;
+}
