@@ -20,6 +20,15 @@
 .trash-btn {
   margin-top: 2vh;
   font-size: 18px;
+  cursor: pointer;
+  padding: 1vh;
+  border: none;
+  color: #fafafa;
+  background-color: transparent;
+}
+
+.trash-btn:hover {
+  color: #d50000;
 }
 
 .subtotal-and-shipping {

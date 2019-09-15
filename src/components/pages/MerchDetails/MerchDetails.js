@@ -111,10 +111,7 @@ function MerchDetails(props) {
   return (
     <section className="merch-details">
       <Modal isOpen={isModalOpen} onClose={closeModal} contentLabel="Merch Details Modal">
-        <div>{modalText}</div>
-        <button type="button" onClick={closeModal}>
-          OK
-        </button>
+        <h3>{modalText}</h3>
       </Modal>
       <Loader isLoading={isLoading}>
         <Header pageTitle={`${item.name} ${item.type}`} isMobileOnly={false} />

@@ -167,10 +167,7 @@ function Checkout(props) {
       <Loader isLoading={isLoading}>
         <Header pageTitle="Checkout" isMobileOnly={false} />
         <Modal isOpen={isModalOpen} onClose={closeModal} contentLabel="Submission error modal">
-          <h5>Please fill out all the fields</h5>
-          <button type="button" onClick={closeModal}>
-            OK
-          </button>
+          <h3>Please fill out all the fields</h3>
         </Modal>
         <div>
           <form onSubmit={handleSubmit}>
