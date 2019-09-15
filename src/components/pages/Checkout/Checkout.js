@@ -111,6 +111,7 @@ function Checkout(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     if (
       !customerInfo.fullName ||
       !customerInfo.email ||
@@ -196,7 +197,12 @@ function Checkout(props) {
               />
             </div>
             <div>
-              <Select placeholder="City" onChange={handleCityChange} options={cities} />
+              <Select
+                value={customerInfo.city}
+                placeholder="City"
+                onChange={handleCityChange}
+                options={cities}
+              />
             </div>
             <div>
               <Input
