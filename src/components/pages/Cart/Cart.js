@@ -10,6 +10,7 @@ import makeRequest from '../../../api/apiClient';
 import * as cartActions from './cartActions';
 import { DELETE_ORDER } from '../../../api/queries';
 import Header from '../../common/Header/Header';
+import Button from '../../common/Button/Button';
 
 import './Cart.css';
 
@@ -78,7 +79,9 @@ function Cart(props) {
             <hr />
             <p>Total: {cart.total + 10} USD</p>
           </div>
-          <Link to="/checkout">Checkout</Link>
+          <Link to="/checkout">
+            <Button text="Checkout" type="button" />
+          </Link>
         </div>
       ) : (
         <div className="empty-cart">

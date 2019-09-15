@@ -10,6 +10,7 @@ import Loader from '../../common/Loader/Loader';
 import Input from '../../common/Input/Input';
 import Select from '../../common/Select/Select';
 import Modal from '../../common/Modal/Modal';
+import Button from '../../common/Button/Button';
 
 import './Checkout.css';
 
@@ -224,11 +225,7 @@ function Checkout(props) {
                 onChange={handleCustomerInfoChange}
               />
             </div>
-            <div>
-              <button type="submit">
-                Pay with <i className="fab fa-paypal" />
-              </button>
-            </div>
+            <Button text="Pay with PayPal" type="submit" />
           </form>
         </div>
       </Loader>

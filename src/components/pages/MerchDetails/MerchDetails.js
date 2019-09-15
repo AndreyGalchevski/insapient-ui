@@ -14,6 +14,7 @@ import Input from '../../common/Input/Input';
 import Modal from '../../common/Modal/Modal';
 
 import './MerchDetails.css';
+import Button from '../../common/Button/Button';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -146,9 +147,7 @@ function MerchDetails(props) {
               onChange={handleQuantityChange}
             />
           </div>
-          <button type="button" onClick={() => handleAddItemClick(item)}>
-            <i className="fa fa-cart-plus" />
-          </button>
+          <Button type="button" onClick={() => handleAddItemClick(item)} text="Add To Cart" />
         </div>
       </Loader>
     </section>
