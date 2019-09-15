@@ -1,26 +1,33 @@
-.merch-details .size-input {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+.merch-details {
+  margin-top: 2vh;
 }
 
-.merch-details .size-label {
-  padding-left: 23px !important;
+.merch-details-image {
+  width: 90%;
+  height: auto;
+}
+
+.size-input-container {
+  padding-bottom: 1vh;
+  padding-top: 1vh;
+}
+
+.size-label {
+  padding-left: 1vh !important;
   color: #212121;
 }
 
-.merch-details .btn-floating.halfway-fab {
-  background-color: #fafafa;
+.size-checkbox {
+  margin-left: 1vh !important;
 }
 
-.merch-details [type="radio"]:checked+span:after {
-  background-color: #212121;
-  border-color: #212121;
+.fa-cart-plus {
+  font-size: 4vh;
 }
 
-.merch-details .size-checkbox {
-  margin-left: 1rem !important;
-}
-
-.merch-details .fa-cart-plus {
-  margin-right: 1rem;
+@media screen and (min-width: 786px) {
+  .merch-details-image {
+    width: 20%;
+    height: auto;
+  }
 }

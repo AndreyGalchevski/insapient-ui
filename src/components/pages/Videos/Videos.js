@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import './Videos.css';
 import makeRequest from '../../../api/apiClient';
+import Loader from '../../common/Loader/Loader';
+import Header from '../../common/Header/Header';
+
+import './Videos.css';
 
 function Videos() {
   const [videos, setVideos] = useState([]);
@@ -27,30 +30,23 @@ function Videos() {
   }, []);
 
   return (
-    <section>
-      <h4 className="grey darken-4 grey-text text-lighten-4 z-depth-4">Videos</h4>
-      <div className="row">
-        {isLoading ? (
-          <h5>Loading...</h5>
-        ) : (
-          videos.map(video => (
-            <div className="col s12 m6" v-for="video in videos" key={video._id}>
-              <div className="video-container card">
-                <iframe
-                  className="card-content"
-                  title={video.name}
-                  src={video.url}
-                  width="560"
-                  height="315"
-                  frameBorder="0"
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                />
-              </div>
+    <section className="videos">
+      <Loader isLoading={isLoading}>
+        <Header pageTitle="Videos" />
+        <div className="videos-container">
+          {videos.map(video => (
+            <div className="video" key={video._id}>
+              <iframe
+                className="embed"
+                title={video.name}
+                src={video.url}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+              />
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      </Loader>
     </section>
   );
 }

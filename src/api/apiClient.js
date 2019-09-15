@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-let baseURL = 'http://localhost:8080/graphql';
+let baseURL = 'https://api.insapient.band/graphql';
 
 if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://insapient-api.herokuapp.com/graphql';
+  baseURL = 'https://api.insapient.band/graphql';
 }
 
 const makeRequest = data => {

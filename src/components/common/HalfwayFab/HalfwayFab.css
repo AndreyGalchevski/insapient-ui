@@ -1,0 +1,9 @@
+.halfway-fab {
+  position: absolute;
+  right: 2vh;
+  top: -3vh;
+  height: 6vh;
+  width: 6vh;
+  border-radius: 20vh;
+  border: 1px solid #fafafa;
+}

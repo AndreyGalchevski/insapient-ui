@@ -1,14 +1,8 @@
-import React, { useEffect } from 'react';
-import M from 'materialize-css/dist/js/materialize.min';
+import React from 'react';
 
 import './Fab.css';
 
 function Fab() {
-  useEffect(() => {
-    const elems = document.querySelectorAll('.fixed-action-btn');
-    M.FloatingActionButton.init(elems, { hoverEnabled: false });
-  }, []);
-
   return (
     <div className="fixed-action-btn">
       <a className="btn-floating btn-large grey darken-2">

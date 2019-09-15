@@ -1,25 +1,40 @@
-import React, { useEffect } from 'react';
-import M from 'materialize-css/dist/js/materialize.min';
+import React from 'react';
+import ReactModal from 'react-modal';
+import PropTypes from 'prop-types';
+
+ReactModal.setAppElement('#root');
 
 function Modal(props) {
-  useEffect(() => {
-    const modalElems = document.querySelectorAll('.modal');
-    M.Modal.init(modalElems, {});
-  });
+  const { isOpen, onClose, contentLabel, children } = props;
 
-  const { id, text } = props;
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  };
+
   return (
-    <div id={id} className="modal">
-      <div className="modal-content">
-        <h5>{text}</h5>
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="modal-close btn btn-flat">
-          Ok
-        </button>
-      </div>
-    </div>
+    <ReactModal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      style={customStyles}
+      contentLabel={contentLabel}
+    >
+      {children}
+    </ReactModal>
   );
 }
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  contentLabel: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
+};
 
 export default Modal;
