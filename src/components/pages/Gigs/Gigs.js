@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import './Gigs.css';
 import makeRequest from '../../../api/apiClient';
 import { GET_GIGS } from '../../../api/queries';
-import { calculateGrid } from '../../../utils';
+import Loader from '../../common/Loader/Loader';
+import Header from '../../common/Header/Header';
+import HalfwayFab from '../../common/HalfwayFab/HalfwayFab';
+
+import './Gigs.css';
 
 function Gigs() {
   const [gigs, setGigs] = useState([]);
@@ -20,39 +23,30 @@ function Gigs() {
   }, []);
 
   return (
-    <section>
-      <h4 className="grey darken-4 grey-text text-lighten-4 z-depth-4">Gigs</h4>
-      <div className="container">
-        <div className="row">
-          {isLoading ? (
-            <h5>Loading...</h5>
-          ) : (
-            gigs.map(gig => (
-              <div className={calculateGrid(gigs.length)} key={gig._id}>
-                <div className="card">
-                  <div className="card-image">
-                    <img src={gig.image} alt="" />
-                    <a
-                      className="btn-floating halfway-fab waves-effect waves-light"
-                      href={gig.fbEvent}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+    <section className="gigs">
+      <Loader isLoading={isLoading}>
+        <Header pageTitle="Gigs" />
+        <div className="gigs-container">
+          <div className="row">
+            {gigs.map(gig => (
+              <div className="gig" key={gig._id}>
+                <img src={gig.image} alt="" />
+                <div className="gig-info">
+                  <HalfwayFab>
+                    <a href={gig.fbEvent} target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-square" />
                     </a>
-                  </div>
-                  <div className="card-content">
-                    <p>{gig.date}</p>
-                    <p>{gig.venue}</p>
-                    <p>{gig.address}</p>
-                    <p>Doors: {gig.hour}</p>
-                  </div>
+                  </HalfwayFab>
+                  <p>{gig.date}</p>
+                  <p>{gig.venue}</p>
+                  <p>{gig.address}</p>
+                  <p>Doors: {gig.hour}</p>
                 </div>
               </div>
-            ))
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      </Loader>
     </section>
   );
 }

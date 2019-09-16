@@ -1,6 +1,10 @@
-.home {
-  padding-bottom: 30px;
+.privacy-policy {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
-.home .external-link {
-  font-size: 16px !important;
+
+.privacy-policy-container {
+  padding-right: 5vw;
+  padding-left: 5vw;
+  text-align: left;
 }

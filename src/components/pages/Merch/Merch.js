@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import './Merch.css';
 import makeRequest from '../../../api/apiClient';
 import { GET_MERCHES } from '../../../api/queries';
+import Loader from '../../common/Loader/Loader';
+import Header from '../../common/Header/Header';
+import HalfwayFab from '../../common/HalfwayFab/HalfwayFab';
+
+import './Merch.css';
 
 function Merch() {
   const [items, setItems] = useState([]);
@@ -20,36 +24,27 @@ function Merch() {
   }, []);
 
   return (
-    <section className="merch">
-      <h4 className="grey darken-4 grey-text text-lighten-4 z-depth-4">Merch</h4>
-      <div className="container">
-        <div className="row">
-          {isLoading ? (
-            <h5>Loading...</h5>
-          ) : (
-            items.map(item => (
-              <div className="col s12 m4" key={item._id}>
-                <div className="card">
-                  <div className="card-image">
-                    <img src={item.image} alt="" className="responsive-img" />
-                    <Link
-                      to={`merch-details/${item._id}`}
-                      className="btn-floating halfway-fab waves-effect waves-light grey darken-2"
-                    >
-                      <i className="material-icons">more</i>
-                    </Link>
-                  </div>
-                  <div className="card-content">
-                    <p>{item.name}</p>
-                    <p>{item.type}</p>
-                    <p>{item.price} USD</p>
-                  </div>
-                </div>
+    <section className="merches">
+      <Loader isLoading={isLoading}>
+        <Header pageTitle="Merch" />
+        <div className="merches-container">
+          {items.map(item => (
+            <div className="merch" key={item._id}>
+              <img src={item.image} alt="" />
+              <div className="merch-info">
+                <HalfwayFab>
+                  <Link to={`merch-details/${item._id}`}>
+                    <i className="fas fa-ellipsis-h"></i>
+                  </Link>
+                </HalfwayFab>
+                <p>{item.name}</p>
+                <p>{item.type}</p>
+                <p>{item.price} USD</p>
               </div>
-            ))
-          )}
+            </div>
+          ))}
         </div>
-      </div>
+      </Loader>
     </section>
   );
 }

@@ -1,0 +1,19 @@
+.input-container {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.input {
+  width: 300px;
+  padding: 1.5vh;
+  border: 2px solid transparent; 
+  border-radius: 1vh;
+  -webkit-border-radius: 1vh;
+  outline: none;
+  font-family: "Cinzel", serif !important;
+  font-size: 14px;
+}
+  
+.input:hover {
+  border-color: #9e9e9e;
+}

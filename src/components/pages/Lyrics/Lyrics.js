@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import './Lyrics.css';
 import makeRequest from '../../../api/apiClient';
 import { GET_LYRICS } from '../../../api/queries';
+import Loader from '../../common/Loader/Loader';
+import Header from '../../common/Header/Header';
+
+import './Lyrics.css';
 
 function Lyrics() {
   const [lyrics, setLyrics] = useState([]);
@@ -19,32 +22,26 @@ function Lyrics() {
   }, []);
 
   return (
-    <section className="Lyrics">
-      <h4 className="grey darken-4 grey-text text-lighten-4 z-depth-4">Lyrics</h4>
-      {isLoading ? (
-        <h5>Loading...</h5>
-      ) : (
-        <div className="masonry">
+    <section className="lyrics">
+      <Loader isLoading={isLoading}>
+        <Header pageTitle="Lyrics" />
+        <div className="lyrics-container">
           {lyrics.map(lyric => (
-            <div key={lyric._id} className="item">
-              <div className="card grey darken-4 grey-text text-lighten-4">
-                <div className="card-content">
-                  <span className="card-title">{lyric.name}</span>
-                  {lyric.text.split(/\n/).map(line => (
-                    <div>
-                      {line.includes('Verse') || line.includes('Chorus') ? (
-                        <b>{line}</b>
-                      ) : (
-                        <p>{line}</p>
-                      )}
-                    </div>
-                  ))}
+            <div key={lyric._id} className="lyric">
+              <span>{lyric.name}</span>
+              {lyric.text.split(/\n/).map(line => (
+                <div>
+                  {line.includes('Verse') || line.includes('Chorus') ? (
+                    <b>{line}</b>
+                  ) : (
+                    <p>{line}</p>
+                  )}
                 </div>
-              </div>
+              ))}
             </div>
           ))}
         </div>
-      )}
+      </Loader>
     </section>
   );
 }

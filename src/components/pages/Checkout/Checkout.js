@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import M from 'materialize-css/dist/js/materialize.min';
 
-import './Checkout.css';
 import makeRequest from '../../../api/apiClient';
 import { GET_COUNTRIES, GET_CITIES, CREATE_ORDER } from '../../../api/queries';
+import Header from '../../common/Header/Header';
+import Loader from '../../common/Loader/Loader';
+import Input from '../../common/Input/Input';
+import Select from '../../common/Select/Select';
+import Modal from '../../common/Modal/Modal';
+import Button from '../../common/Button/Button';
 
-const selectStyles = {
-  control: styles => ({
-    ...styles,
-    backgroundColor: 'transparent',
-    borderColor: '#bdbdbd',
-    '&:hover': { borderColor: '#424242' },
-    boxShadow: 'none'
-  }),
-  option: styles => ({
-    ...styles,
-    backgroundColor: '#9e9e9e',
-    color: '#FFF'
-  })
-};
+import './Checkout.css';
 
 function mapStateToProps(state) {
   return {
@@ -34,6 +24,7 @@ function Checkout(props) {
   const { cart } = props;
 
   const [isLoading, setLoading] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
   const [customerInfo, setCustomerInfo] = useState({
@@ -44,10 +35,6 @@ function Checkout(props) {
     address: '',
     zipCode: '',
     cellphone: ''
-  });
-
-  useEffect(() => {
-    M.updateTextFields();
   });
 
   useEffect(() => {
@@ -95,10 +82,13 @@ function Checkout(props) {
     }
   }, [customerInfo.country.value]);
 
-  useEffect(() => {
-    const elems = document.querySelectorAll('.modal');
-    M.Modal.init(elems, {});
-  });
+  function openModal() {
+    setModalOpen(true);
+  }
+
+  function closeModal() {
+    setModalOpen(false);
+  }
 
   function handleCustomerInfoChange(e) {
     const { name, value } = e.target;
@@ -121,6 +111,7 @@ function Checkout(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     if (
       !customerInfo.fullName ||
       !customerInfo.email ||
@@ -130,9 +121,7 @@ function Checkout(props) {
       !customerInfo.zipCode ||
       !customerInfo.cellphone
     ) {
-      const elem = document.querySelector('.modal');
-      const errorModal = M.Modal.getInstance(elem);
-      errorModal.open();
+      openModal();
       return;
     }
 
@@ -174,105 +163,75 @@ function Checkout(props) {
     window.open(res.data.data.createOrder, '_self');
   }
 
-  if (isLoading) {
-    return <h5>Loading...</h5>;
-  }
-
   return (
     <section className="checkout">
-      <h4 className="grey darken-4 grey-text text-lighten-4 z-depth-4">Checkout</h4>
-      <div className="container">
-        <form className="row" onSubmit={handleSubmit}>
-          {isLoading ? (
-            <h5>Loading...</h5>
-          ) : (
-            <React.Fragment>
-              <div className="modal">
-                <div className="modal-content">
-                  <h5>Please fill out all the fields</h5>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="modal-close btn btn-flat">
-                    Ok
-                  </button>
-                </div>
-              </div>
-              <div className="input-field col s12 m6 offset-m3">
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  value={customerInfo.fullName}
-                  onChange={handleCustomerInfoChange}
-                />
-                <label htmlFor="fullName">Full Name</label>
-              </div>
-              <div className="input-field col s12 m6 offset-m3">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={customerInfo.email}
-                  onChange={handleCustomerInfoChange}
-                />
-                <label htmlFor="email">Email</label>
-              </div>
-              <div className="col s12 m6 offset-m3 input-field">
-                <Select
-                  value={customerInfo.country}
-                  placeholder="Country"
-                  onChange={handleCountryChange}
-                  options={countries}
-                  styles={selectStyles}
-                />
-              </div>
-              <div className="col s12 m6 offset-m3 input-field">
-                <Select
-                  placeholder="City"
-                  onChange={handleCityChange}
-                  options={cities}
-                  styles={selectStyles}
-                />
-              </div>
-              <div className="input-field col s12 m6 offset-m3">
-                <input
-                  id="address"
-                  name="address"
-                  type="text"
-                  value={customerInfo.address}
-                  onChange={handleCustomerInfoChange}
-                />
-                <label htmlFor="address">Address</label>
-              </div>
-              <div className="input-field col s12 m6 offset-m3">
-                <input
-                  id="zipCode"
-                  name="zipCode"
-                  type="text"
-                  value={customerInfo.zipCode}
-                  onChange={handleCustomerInfoChange}
-                />
-                <label htmlFor="zipCode">Zip Code</label>
-              </div>
-              <div className="input-field col s12 m6 offset-m3">
-                <input
-                  id="cellphone"
-                  name="cellphone"
-                  type="text"
-                  value={customerInfo.cellphone}
-                  onChange={handleCustomerInfoChange}
-                />
-                <label htmlFor="cellphone">Cellphone</label>
-              </div>
-              <div className="col s12">
-                <button type="submit" className="btn btn-flat">
-                  Pay with <i className="fab fa-paypal" />
-                </button>
-              </div>
-            </React.Fragment>
-          )}
-        </form>
-      </div>
+      <Loader isLoading={isLoading}>
+        <Header pageTitle="Checkout" isMobileOnly={false} />
+        <Modal isOpen={isModalOpen} onClose={closeModal} contentLabel="Submission error modal">
+          <h3>Please fill out all the fields</h3>
+        </Modal>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <Input
+                type="text"
+                name="fullName"
+                value={customerInfo.fullName}
+                onChange={handleCustomerInfoChange}
+              />
+            </div>
+            <div>
+              <Input
+                type="email"
+                name="email"
+                value={customerInfo.email}
+                onChange={handleCustomerInfoChange}
+              />
+            </div>
+            <div>
+              <Select
+                value={customerInfo.country}
+                placeholder="Country"
+                onChange={handleCountryChange}
+                options={countries}
+              />
+            </div>
+            <div>
+              <Select
+                value={customerInfo.city}
+                placeholder="City"
+                onChange={handleCityChange}
+                options={cities}
+              />
+            </div>
+            <div>
+              <Input
+                type="text"
+                name="address"
+                value={customerInfo.address}
+                onChange={handleCustomerInfoChange}
+              />
+            </div>
+            <div>
+              <Input
+                type="text"
+                name="zipCode"
+                value={customerInfo.zipCode}
+                onChange={handleCustomerInfoChange}
+              />
+            </div>
+            <div>
+              <Input
+                name="cellphone"
+                type="text"
+                value={customerInfo.cellphone}
+                onChange={handleCustomerInfoChange}
+              />
+            </div>
+            <Button text="Pay with PayPal" type="submit" />
+          </form>
+        </div>
+      </Loader>
     </section>
   );
 }

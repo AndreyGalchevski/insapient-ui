@@ -1,11 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import 'swiper/dist/css/swiper.min.css';
-import 'materialize-css/dist/css/materialize.min.css';
-import './App.css';
 
 import Navbar from '../components/layout/Navbar/Navbar';
-import Fab from '../components/layout/Fab/Fab';
+// import Fab from '../components/layout/Fab/Fab';
 import Footer from '../components/layout/Footer/Footer';
 import Home from '../components/pages/Home/Home';
 import Band from '../components/pages/Band/Band';
@@ -20,11 +18,13 @@ import Checkout from '../components/pages/Checkout/Checkout';
 import SuccessfulOrder from '../components/pages/SuccessfulOrder/SuccessfulOrder';
 import PrivacyPolicy from '../components/pages/PrivacyPolicy/PrivacyPolicy';
 
+import './App.css';
+
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Navbar />
-      <Fab />
+      {/* <Fab /> */}
       <Route exact path="/" component={Home} />
       <Route exact path="/band" component={Band} />
       <Route exact path="/gigs" component={Gigs} />
@@ -38,7 +38,7 @@ function App() {
       <Route exact path="/successful-order" component={SuccessfulOrder} />
       <Route exact path="/privacy-policy" component={PrivacyPolicy} />
       <Footer />
-    </div>
+    </main>
   );
 }
 

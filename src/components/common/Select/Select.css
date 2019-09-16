@@ -1,0 +1,7 @@
+.select-container {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+}

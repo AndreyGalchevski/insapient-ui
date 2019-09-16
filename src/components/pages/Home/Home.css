@@ -1,7 +1,22 @@
-.home .container {
-  padding-top: 30px;
+.home {
+  margin-top: 4vh;
 }
+
 .band-message {
-  margin-top: 45px;
+  margin-top: 6vh;
+  padding-right: 10vw;
+  padding-left: 10vw;
+  font-size: 20px;
   color: #212121;
+}
+
+.swiper-slide img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-slide img {
+    max-width: 63%;
+  }
 }

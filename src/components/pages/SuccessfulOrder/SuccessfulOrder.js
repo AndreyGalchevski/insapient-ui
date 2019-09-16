@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import qs from 'query-string';
 
-import './SuccessfulOrder.css';
+import * as cartActions from '../Cart/cartActions';
 import makeRequest from '../../../api/apiClient';
 import { UPDATE_ORDER } from '../../../api/queries';
+import Loader from '../../common/Loader/Loader';
 
-import * as cartActions from '../Cart/cartActions';
+import './SuccessfulOrder.css';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -52,29 +54,19 @@ function SuccessfulOrder(props) {
 
   return (
     <section className="successful-order">
-      <div className="container">
-        <div className="row">
-          {isLoading ? (
-            <h5>Loading...</h5>
-          ) : (
-            <div className="col s12">
-              <div className="success-message">
-                <h5>Thank You For Your Support</h5>
-                <h4>Cheers!</h4>
-                <Link to="/" className="btn btn-flat">
-                  Back To Main Page
-                </Link>
-              </div>
-            </div>
-          )}
+      <Loader isLoading={isLoading}>
+        <div className="success-message">
+          <h5>Thank You For Your Support</h5>
+          <h4>Cheers!</h4>
+          <Link to="/">Back To Main Page</Link>
         </div>
-      </div>
+      </Loader>
     </section>
   );
 }
 
 SuccessfulOrder.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: ReactRouterPropTypes.location.isRequired,
   clearCart: PropTypes.func.isRequired
 };
 

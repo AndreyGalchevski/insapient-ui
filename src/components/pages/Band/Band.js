@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import makeRequest from '../../../api/apiClient';
 import { GET_MEMBERS } from '../../../api/queries';
+import Loader from '../../common/Loader/Loader';
+import Header from '../../common/Header/Header';
+
+import './Band.css';
 
 function Band() {
   const [members, setMembers] = useState([]);
@@ -18,29 +22,21 @@ function Band() {
   }, []);
 
   return (
-    <section className="Band">
-      <h4 className="grey darken-4 grey-text text-lighten-4 z-depth-4">Band</h4>
-      <div className="container">
-        <div className="row">
-          {isLoading ? (
-            <h5>Loading...</h5>
-          ) : (
-            members.map(member => (
-              <div className="col s12 m4" key={member._id}>
-                <div className="card grey darken-4">
-                  <div className="card-image">
-                    <img className="responsive-img" src={member.image} alt="" />
-                  </div>
-                  <div className="card-content">
-                    <p className="card-title grey-text text-lighten-4">{member.name}</p>
-                    <p className="card-title grey-text text-lighten-4">{member.instrument}</p>
-                  </div>
-                </div>
+    <section className="band">
+      <Loader isLoading={isLoading}>
+        <Header pageTitle="Band" />
+        <div className="members-container">
+          {members.map(member => (
+            <div className="member" key={member._id}>
+              <img src={member.image} alt="" />
+              <div className="member-info">
+                <p>{member.name}</p>
+                <p>{member.instrument}</p>
               </div>
-            ))
-          )}
+            </div>
+          ))}
         </div>
-      </div>
+      </Loader>
     </section>
   );
 }
