@@ -1,33 +1,20 @@
 import React, { useEffect } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import qs from 'query-string';
 
 import makeRequest from '../../../api/apiClient';
-import * as cartActions from './cartActions';
+import { DELETE_ITEM_FROM_CART } from './cartActionTypes';
+import { useCartContext } from './cartContext';
 import { DELETE_ORDER } from '../../../api/queries';
 import Header from '../../common/Header/Header';
 import Button from '../../common/Button/Button';
 
 import './Cart.css';
 
-function mapStateToProps(state) {
-  return {
-    cart: state.cart
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    ...bindActionCreators(cartActions, dispatch)
-  };
-}
-
 function Cart(props) {
-  const { cart, deleteItemFromCart, location } = props;
+  const { location } = props;
+  const [cart, dispatch] = useCartContext();
 
   useEffect(() => {
     async function cancelOrder() {
@@ -65,7 +52,7 @@ function Cart(props) {
                 <button
                   className="trash-btn"
                   type="button"
-                  onClick={() => deleteItemFromCart(item)}
+                  onClick={() => dispatch({ type: DELETE_ITEM_FROM_CART, payload: item })}
                 >
                   <i className="fas fa-trash-alt" />
                 </button>
@@ -98,12 +85,7 @@ function Cart(props) {
 }
 
 Cart.propTypes = {
-  cart: PropTypes.object.isRequired,
-  deleteItemFromCart: PropTypes.func.isRequired,
   location: ReactRouterPropTypes.location.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default Cart;

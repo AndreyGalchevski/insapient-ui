@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import './Navbar.css';
 
-function mapStateToProps(state) {
-  return {
-    cart: state.cart
-  };
-}
+import { useCartContext } from '../../pages/Cart/cartContext';
 
-function Navbar(props) {
-  const { cart } = props;
+function Navbar() {
+  const [cart] = useCartContext();
 
   function toggleSideNav() {
     const mainNav = document.querySelector('.main-nav');
@@ -74,8 +68,4 @@ function Navbar(props) {
   );
 }
 
-Navbar.propTypes = {
-  cart: PropTypes.object.isRequired
-};
-
-export default connect(mapStateToProps)(Navbar);
+export default Navbar;

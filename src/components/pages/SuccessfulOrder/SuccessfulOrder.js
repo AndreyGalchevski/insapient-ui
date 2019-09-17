@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import qs from 'query-string';
 
-import * as cartActions from '../Cart/cartActions';
 import makeRequest from '../../../api/apiClient';
 import { UPDATE_ORDER } from '../../../api/queries';
+import { CLEAR_CART } from '../Cart/cartActionTypes';
+import { useCartContext } from '../Cart/cartContext';
 import Loader from '../../common/Loader/Loader';
 
 import './SuccessfulOrder.css';
 
-function mapDispatchToProps(dispatch) {
-  return {
-    ...bindActionCreators(cartActions, dispatch)
-  };
-}
-
 function SuccessfulOrder(props) {
-  const { location, clearCart } = props;
+  const { location } = props;
 
+  const [, dispatch] = useCartContext();
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -49,7 +42,7 @@ function SuccessfulOrder(props) {
     }
 
     finishOrder();
-    clearCart();
+    dispatch({ type: CLEAR_CART });
   }, []);
 
   return (
@@ -66,11 +59,7 @@ function SuccessfulOrder(props) {
 }
 
 SuccessfulOrder.propTypes = {
-  location: ReactRouterPropTypes.location.isRequired,
-  clearCart: PropTypes.func.isRequired
+  location: ReactRouterPropTypes.location.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SuccessfulOrder);
+export default SuccessfulOrder;

@@ -1,30 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { v4 } from 'uuid';
 
 import makeRequest from '../../../api/apiClient';
 import { GET_MERCH } from '../../../api/queries';
-import * as cartActions from '../Cart/cartActions';
+import { useCartContext } from '../Cart/cartContext';
+import { ADD_ITEM_TO_CART } from '../Cart/cartActionTypes';
 import Loader from '../../common/Loader/Loader';
 import Header from '../../common/Header/Header';
 import Input from '../../common/Input/Input';
 import Modal from '../../common/Modal/Modal';
-
-import './MerchDetails.css';
 import Button from '../../common/Button/Button';
 
-function mapDispatchToProps(dispatch) {
-  return {
-    ...bindActionCreators(cartActions, dispatch)
-  };
-}
+import './MerchDetails.css';
 
 function MerchDetails(props) {
-  const { match, addItemToCart } = props;
-
+  const { match } = props;
+  const [, dispatch] = useCartContext();
   const [isLoading, setLoading] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalText, setModalText] = useState('');
@@ -101,7 +93,7 @@ function MerchDetails(props) {
       quantity: Number(state.quantity)
     };
 
-    addItemToCart(cartItem);
+    dispatch({ type: ADD_ITEM_TO_CART, payload: cartItem });
     setTimeout(() => {
       setModalText('The item has been added to your cart');
       openModal();
@@ -152,11 +144,7 @@ function MerchDetails(props) {
 }
 
 MerchDetails.propTypes = {
-  addItemToCart: PropTypes.func.isRequired,
   match: ReactRouterPropTypes.match.isRequired
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(MerchDetails);
+export default MerchDetails;

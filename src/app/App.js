@@ -8,6 +8,7 @@ import Navbar from '../components/layout/Navbar/Navbar';
 // import Fab from '../components/layout/Fab/Fab';
 import Footer from '../components/layout/Footer/Footer';
 import Loader from '../components/common/Loader/Loader';
+import { CartProvider } from '../components/pages/Cart/cartContext';
 
 const Home = withRouter(lazy(() => import('../components/pages/Home/Home')));
 const Band = withRouter(lazy(() => import('../components/pages/Band/Band')));
@@ -30,25 +31,27 @@ const PrivacyPolicy = withRouter(
 
 function App() {
   return (
-    <main className="App">
-      <Suspense fallback={<Loader isLoading />}>
-        <Navbar />
-        {/* <Fab /> */}
-        <Route exact path="/" component={Home} />
-        <Route exact path="/band" component={Band} />
-        <Route exact path="/gigs" component={Gigs} />
-        <Route exact path="/lyrics" component={Lyrics} />
-        <Route exact path="/songs" component={Songs} />
-        <Route exact path="/videos" component={Videos} />
-        <Route exact path="/merch" component={Merch} />
-        <Route exact path="/merch-details/:id" component={MerchDetails} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/checkout" component={Checkout} />
-        <Route exact path="/successful-order" component={SuccessfulOrder} />
-        <Route exact path="/privacy-policy" component={PrivacyPolicy} />
-        <Footer />
-      </Suspense>
-    </main>
+    <CartProvider>
+      <main className="App">
+        <Suspense fallback={<Loader isLoading />}>
+          <Navbar />
+          {/* <Fab /> */}
+          <Route exact path="/" component={Home} />
+          <Route exact path="/band" component={Band} />
+          <Route exact path="/gigs" component={Gigs} />
+          <Route exact path="/lyrics" component={Lyrics} />
+          <Route exact path="/songs" component={Songs} />
+          <Route exact path="/videos" component={Videos} />
+          <Route exact path="/merch" component={Merch} />
+          <Route exact path="/merch-details/:id" component={MerchDetails} />
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/successful-order" component={SuccessfulOrder} />
+          <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+          <Footer />
+        </Suspense>
+      </main>
+    </CartProvider>
   );
 }
 

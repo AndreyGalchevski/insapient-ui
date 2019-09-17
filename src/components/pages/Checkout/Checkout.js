@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import makeRequest from '../../../api/apiClient';
 import { GET_COUNTRIES, GET_CITIES, CREATE_ORDER } from '../../../api/queries';
+import { useCartContext } from '../Cart/cartContext';
 import Header from '../../common/Header/Header';
 import Loader from '../../common/Loader/Loader';
 import Input from '../../common/Input/Input';
@@ -14,15 +13,8 @@ import Button from '../../common/Button/Button';
 
 import './Checkout.css';
 
-function mapStateToProps(state) {
-  return {
-    cart: state.cart
-  };
-}
-
-function Checkout(props) {
-  const { cart } = props;
-
+function Checkout() {
+  const [cart] = useCartContext();
   const [isLoading, setLoading] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [countries, setCountries] = useState([]);
@@ -236,8 +228,4 @@ function Checkout(props) {
   );
 }
 
-Checkout.propTypes = {
-  cart: PropTypes.object.isRequired
-};
-
-export default connect(mapStateToProps)(Checkout);
+export default Checkout;
