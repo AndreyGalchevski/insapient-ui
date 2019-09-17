@@ -9,9 +9,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  padding-bottom: 20px;
-  background: linear-gradient(#212121, #fafafa) no-repeat center center fixed;
-  background: -webkit-linear-gradient(#212121, #fafafa) no-repeat center center fixed;
+  padding-bottom: 2vh;
+  background: linear-gradient(#212121, #fafafa) no-repeat center;
+  background: -webkit-linear-gradient(#212121, #fafafa) no-repeat center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
