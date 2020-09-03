@@ -46,12 +46,13 @@ module.exports = {
       threshold: 10240,
       minRatio: 0.8
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, './_redirects'),
-        to: path.resolve(__dirname, './dist'),
-        ignore: ['.*']
-      }
-    ])
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, './_redirects'),
+          to: path.resolve(__dirname, './dist')
+        }
+      ]
+    })
   ]
 };

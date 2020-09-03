@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, withRouter } from 'react-router-dom';
-import 'swiper/dist/css/swiper.min.css';
+import 'swiper/swiper-bundle.css';
 
 import './App.css';
 
