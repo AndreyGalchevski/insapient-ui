@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import qs from 'query-string';
 
-import makeRequest from '../../../api/apiClient';
-import { UPDATE_ORDER } from '../../../api/queries';
+import { updateResource } from '../../../api/utils';
 import { CLEAR_CART } from '../Cart/cartActionTypes';
 import { useCartContext } from '../Cart/cartContext';
 import Loader from '../../common/Loader/Loader';
@@ -28,12 +27,7 @@ function SuccessfulOrder(props) {
             paymentId,
             payerId: PayerID
           };
-          await makeRequest({
-            query: UPDATE_ORDER,
-            variables: {
-              order: updatedOrder
-            }
-          });
+          await updateResource('orders', updatedOrder.paymentId, updatedOrder);
           setLoading(false);
         } catch (error) {
           setLoading(false);

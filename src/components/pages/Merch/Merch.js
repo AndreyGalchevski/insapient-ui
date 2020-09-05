@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import makeRequest from '../../../api/apiClient';
-import { GET_MERCHES } from '../../../api/queries';
+import { fetchResources } from '../../../api/utils';
 import Loader from '../../common/Loader/Loader';
 import Header from '../../common/Header/Header';
 import HalfwayFab from '../../common/HalfwayFab/HalfwayFab';
@@ -16,8 +15,8 @@ function Merch() {
   useEffect(() => {
     async function fetchMerch() {
       setLoading(true);
-      const res = await makeRequest({ query: GET_MERCHES });
-      setItems(res.data.data.merches);
+      const res = await fetchResources('merchandises');
+      setItems(res.data);
       setLoading(false);
     }
     fetchMerch();

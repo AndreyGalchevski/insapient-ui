@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import makeRequest from '../../../api/apiClient';
-import { GET_LYRICS } from '../../../api/queries';
+import { fetchResources } from '../../../api/utils';
 import Loader from '../../common/Loader/Loader';
 import Header from '../../common/Header/Header';
 
@@ -14,8 +13,8 @@ function Lyrics() {
   useEffect(() => {
     async function fetchLyrics() {
       setLoading(true);
-      const res = await makeRequest({ query: GET_LYRICS });
-      setLyrics(res.data.data.lyrics);
+      const res = await fetchResources('lyrics');
+      setLyrics(res.data);
       setLoading(false);
     }
     fetchLyrics();

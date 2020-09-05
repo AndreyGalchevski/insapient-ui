@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import qs from 'query-string';
 
-import makeRequest from '../../../api/apiClient';
+import { deleteResource } from '../../../api/utils';
 import { DELETE_ITEM_FROM_CART } from './cartActionTypes';
 import { useCartContext } from './cartContext';
-import { DELETE_ORDER } from '../../../api/queries';
 import Header from '../../common/Header/Header';
 import Button from '../../common/Button/Button';
 
@@ -20,12 +19,7 @@ function Cart(props) {
     async function cancelOrder() {
       const { token } = qs.parse(location.search);
       try {
-        await makeRequest({
-          query: DELETE_ORDER,
-          variables: {
-            token
-          }
-        });
+        await deleteResource('orders', token);
       } catch (error) {
         console.log(error);
       }

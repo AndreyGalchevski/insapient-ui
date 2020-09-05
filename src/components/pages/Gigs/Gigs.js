@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import makeRequest from '../../../api/apiClient';
-import { GET_GIGS } from '../../../api/queries';
+import { fetchResources } from '../../../api/utils';
 import Loader from '../../common/Loader/Loader';
 import Header from '../../common/Header/Header';
 import HalfwayFab from '../../common/HalfwayFab/HalfwayFab';
@@ -15,8 +14,8 @@ function Gigs() {
   useEffect(() => {
     async function fetchGigs() {
       setLoading(true);
-      const res = await makeRequest({ query: GET_GIGS });
-      setGigs(res.data.data.gigs);
+      const res = await fetchResources('gigs');
+      setGigs(res.data);
       setLoading(false);
     }
     fetchGigs();

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
-import makeRequest from '../../../api/apiClient';
-import { GET_COUNTRIES, GET_CITIES, CREATE_ORDER } from '../../../api/queries';
+import { fetchResources, createResource } from '../../../api/utils';
 import { useCartContext } from '../Cart/cartContext';
 import Header from '../../common/Header/Header';
 import Loader from '../../common/Loader/Loader';
@@ -31,10 +29,11 @@ function Checkout() {
 
   useEffect(() => {
     async function fetchUserLocation() {
-      const res = await axios.get('https://ipapi.co/json');
+      const response = await fetch('https://ipapi.co/json');
+      const data = await response.json();
       setCustomerInfo({
         ...customerInfo,
-        country: { value: res.data.country, label: res.data.country_name }
+        country: { value: data.country, label: data.country_name }
       });
     }
 
@@ -43,7 +42,7 @@ function Checkout() {
 
   useEffect(() => {
     async function fetchCountries() {
-      const res = await makeRequest({ query: GET_COUNTRIES });
+      const res = await fetchResources('countries');
       const countryOptions = res.data.data.countries.map(c => ({
         label: c.name,
         value: c.code
@@ -56,13 +55,8 @@ function Checkout() {
 
   useEffect(() => {
     async function fetchCities(country) {
-      const res = await makeRequest({
-        query: GET_CITIES,
-        variables: {
-          country
-        }
-      });
-      const cityOptions = res.data.data.cities.map(c => ({
+      const res = await fetchResources(`cities?country=${country}`);
+      const cityOptions = res.data.map(c => ({
         label: c.name,
         value: c._id
       }));
@@ -145,14 +139,9 @@ function Checkout() {
       }
     };
     setLoading(true);
-    const res = await makeRequest({
-      query: CREATE_ORDER,
-      variables: {
-        order
-      }
-    });
+    const res = await createResource('orders', order);
     setLoading(false);
-    window.open(res.data.data.createOrder, '_self');
+    window.open(res.data, '_self');
   }
 
   return (

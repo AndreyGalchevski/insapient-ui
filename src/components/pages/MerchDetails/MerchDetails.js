@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { v4 } from 'uuid';
 
-import makeRequest from '../../../api/apiClient';
-import { GET_MERCH } from '../../../api/queries';
+import { fetchResource } from '../../../api/utils';
 import { useCartContext } from '../Cart/cartContext';
 import { ADD_ITEM_TO_CART } from '../Cart/cartActionTypes';
 import Loader from '../../common/Loader/Loader';
@@ -30,11 +29,8 @@ function MerchDetails(props) {
     async function fetchMerchDetails(id) {
       setLoading(true);
       try {
-        const res = await makeRequest({
-          query: GET_MERCH,
-          variables: { merchId: id }
-        });
-        setItem(res.data.data.merch);
+        const res = await fetchResource('merchandises', id);
+        setItem(res.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);

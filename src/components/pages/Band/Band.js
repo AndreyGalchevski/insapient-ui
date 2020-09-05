@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import makeRequest from '../../../api/apiClient';
-import { GET_MEMBERS } from '../../../api/queries';
+import { fetchResources } from '../../../api/utils';
 import Loader from '../../common/Loader/Loader';
 import Header from '../../common/Header/Header';
 
@@ -14,8 +13,8 @@ function Band() {
   useEffect(() => {
     async function fetchMembers() {
       setLoading(true);
-      const res = await makeRequest({ query: GET_MEMBERS });
-      setMembers(res.data.data.members);
+      const res = await fetchResources('members');
+      setMembers(res.data);
       setLoading(false);
     }
     fetchMembers();

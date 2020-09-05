@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import makeRequest from '../../../api/apiClient';
+import { fetchResources } from '../../../api/utils';
 import Loader from '../../common/Loader/Loader';
 import Header from '../../common/Header/Header';
 
@@ -13,17 +13,8 @@ function Videos() {
   useEffect(() => {
     async function fetchVideos() {
       setLoading(true);
-      const GET_VIDEOS = `
-        {
-          videos {
-            _id
-            name
-            url
-          }
-        }
-      `;
-      const res = await makeRequest({ query: GET_VIDEOS });
-      setVideos(res.data.data.videos);
+      const res = await fetchResources('videos');
+      setVideos(res.data);
       setLoading(false);
     }
     fetchVideos();
