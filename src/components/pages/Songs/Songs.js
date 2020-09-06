@@ -25,7 +25,7 @@ function Songs() {
       <Loader isLoading={isLoading}>
         <Header pageTitle="Songs" />
         <div className="songs-container">
-          {songs.map(song => (
+          {songs.map((song) => (
             <div className="song" key={song._id}>
               <iframe
                 title={song.name}
@@ -35,7 +35,7 @@ function Songs() {
                 frameBorder="0"
                 allowTransparency="true"
                 allow="encrypted-media"
-              ></iframe>
+              />
             </div>
           ))}
         </div>

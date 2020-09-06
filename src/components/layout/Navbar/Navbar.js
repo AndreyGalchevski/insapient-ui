@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 import './Navbar.css';
 
-import { useCartContext } from '../../pages/Cart/cartContext';
+// import { useCartContext } from '../../pages/Cart/cartContext';
 
 function Navbar() {
-  const [cart] = useCartContext();
+  // const [cart] = useCartContext();
 
   function toggleSideNav() {
     const mainNav = document.querySelector('.main-nav');

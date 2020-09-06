@@ -11,11 +11,11 @@ function Header(props) {
 
 Header.propTypes = {
   pageTitle: PropTypes.string.isRequired,
-  isMobileOnly: PropTypes.bool
+  isMobileOnly: PropTypes.bool,
 };
 
 Header.defaultProps = {
-  isMobileOnly: true
+  isMobileOnly: true,
 };
 
 export default Header;

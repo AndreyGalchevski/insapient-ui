@@ -8,21 +8,21 @@ function Select(props) {
   const { value, placeholder, onChange, options } = props;
 
   const customStyles = {
-    control: styles => ({
+    control: (styles) => ({
       ...styles,
       borderColor: 'transparent',
       '&:hover': { borderColor: '#9e9e9e' },
       boxShadow: 'none',
-      width: 300
+      width: 300,
     }),
-    option: styles => ({
+    option: (styles) => ({
       ...styles,
-      width: 300
+      width: 300,
     }),
-    menu: styles => ({
+    menu: (styles) => ({
       ...styles,
-      width: 300
-    })
+      width: 300,
+    }),
   };
 
   return (
@@ -43,11 +43,11 @@ Select.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string }))
-    .isRequired
+    .isRequired,
 };
 
 Select.defaultProps = {
-  value: {}
+  value: {},
 };
 
 export default Select;

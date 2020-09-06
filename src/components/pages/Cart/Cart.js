@@ -18,11 +18,7 @@ function Cart(props) {
   useEffect(() => {
     async function cancelOrder() {
       const { token } = qs.parse(location.search);
-      try {
-        await deleteResource('orders', token);
-      } catch (error) {
-        console.log(error);
-      }
+      await deleteResource('orders', token);
     }
 
     if (location.search) {
@@ -36,7 +32,7 @@ function Cart(props) {
       {cart.items.length > 0 ? (
         <div>
           <div className="items-container">
-            {cart.items.map(item => (
+            {cart.items.map((item) => (
               <div className="item" key={item.id}>
                 <p>Item: {item.name}</p>
                 <p>Type: {item.type}</p>
@@ -79,7 +75,7 @@ function Cart(props) {
 }
 
 Cart.propTypes = {
-  location: ReactRouterPropTypes.location.isRequired
+  location: ReactRouterPropTypes.location.isRequired,
 };
 
 export default Cart;

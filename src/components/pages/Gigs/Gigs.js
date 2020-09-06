@@ -27,7 +27,7 @@ function Gigs() {
         <Header pageTitle="Gigs" />
         <div className="gigs-container">
           <div className="row">
-            {gigs.map(gig => (
+            {gigs.map((gig) => (
               <div className="gig" key={gig._id}>
                 <img src={gig.image} alt="" />
                 <div className="gig-info">

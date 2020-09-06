@@ -22,7 +22,7 @@ function MerchDetails(props) {
   const [item, setItem] = useState({});
   const [state, setState] = useState({
     size: '',
-    quantity: ''
+    quantity: '',
   });
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function MerchDetails(props) {
   }
 
   function handleSizeChange(param) {
-    return function(e) {
+    return function (e) {
       const { value } = e.target;
       const selectedQuantityEl = document.getElementById('quantity');
       selectedQuantityEl.disabled = false;
@@ -86,7 +86,7 @@ function MerchDetails(props) {
       type: merchItem.type,
       price: Number(merchItem.price),
       size: state.size || '',
-      quantity: Number(state.quantity)
+      quantity: Number(state.quantity),
     };
 
     dispatch({ type: ADD_ITEM_TO_CART, payload: cartItem });
@@ -108,7 +108,7 @@ function MerchDetails(props) {
           {item && item.stock && item.stock.sizes && (
             <div onChange={handleSizeChange(item.stock.sizes)}>
               <div className="size-input-container">
-                {Object.keys(item.stock.sizes).map(key => (
+                {Object.keys(item.stock.sizes).map((key) => (
                   <span className="size-checkbox">
                     <input
                       id="size"
@@ -140,7 +140,7 @@ function MerchDetails(props) {
 }
 
 MerchDetails.propTypes = {
-  match: ReactRouterPropTypes.match.isRequired
+  match: ReactRouterPropTypes.match.isRequired,
 };
 
 export default MerchDetails;

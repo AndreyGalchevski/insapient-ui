@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 
-import { initSlider } from '../../../utils';
+import utils from '../../../utils';
 
 import './Home.css';
 
 function Home() {
   useEffect(() => {
-    initSlider('.swiper-container');
+    utils.initSlider('.swiper-container');
   }, []);
 
   return (

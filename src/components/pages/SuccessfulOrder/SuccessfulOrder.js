@@ -25,7 +25,7 @@ function SuccessfulOrder(props) {
           const updatedOrder = {
             status: 'paid',
             paymentId,
-            payerId: PayerID
+            payerId: PayerID,
           };
           await updateResource('orders', updatedOrder.paymentId, updatedOrder);
           setLoading(false);
@@ -53,7 +53,7 @@ function SuccessfulOrder(props) {
 }
 
 SuccessfulOrder.propTypes = {
-  location: ReactRouterPropTypes.location.isRequired
+  location: ReactRouterPropTypes.location.isRequired,
 };
 
 export default SuccessfulOrder;

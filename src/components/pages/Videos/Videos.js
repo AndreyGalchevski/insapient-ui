@@ -25,7 +25,7 @@ function Videos() {
       <Loader isLoading={isLoading}>
         <Header pageTitle="Videos" />
         <div className="videos-container">
-          {videos.map(video => (
+          {videos.map((video) => (
             <div className="video" key={video._id}>
               <iframe
                 className="embed"

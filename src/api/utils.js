@@ -6,8 +6,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const options = {
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 };
 
 export async function fetchResources(resourceName) {
@@ -27,9 +27,9 @@ export async function createResource(resourceName, data) {
     ...options,
     method: 'POST',
     headers: {
-      ...options.headers
+      ...options.headers,
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 
   switch (response.status) {
@@ -52,9 +52,9 @@ export async function updateResource(resourceName, resourceId, data) {
     method: 'PUT',
     headers: {
       ...options.headers,
-      Authorization: `Bearer ${localStorage.getItem('stridentToken')}`
+      Authorization: `Bearer ${localStorage.getItem('stridentToken')}`,
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 
   switch (response.status) {
@@ -76,8 +76,8 @@ export async function deleteResource(resourceName, resourceId) {
     ...options,
     method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('stridentToken')}`
-    }
+      Authorization: `Bearer ${localStorage.getItem('stridentToken')}`,
+    },
   });
 
   switch (response.status) {

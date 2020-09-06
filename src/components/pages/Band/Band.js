@@ -25,7 +25,7 @@ function Band() {
       <Loader isLoading={isLoading}>
         <Header pageTitle="Band" />
         <div className="members-container">
-          {members.map(member => (
+          {members.map((member) => (
             <div className="member" key={member._id}>
               <img src={member.image} alt="" />
               <div className="member-info">

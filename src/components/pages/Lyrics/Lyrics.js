@@ -25,10 +25,10 @@ function Lyrics() {
       <Loader isLoading={isLoading}>
         <Header pageTitle="Lyrics" />
         <div className="lyrics-container">
-          {lyrics.map(lyric => (
+          {lyrics.map((lyric) => (
             <div key={lyric._id} className="lyric">
               <span>{lyric.name}</span>
-              {lyric.text.split(/\n/).map(line => (
+              {lyric.text.split(/\n/).map((line) => (
                 <div>
                   {line.includes('Verse') || line.includes('Chorus') ? (
                     <b>{line}</b>

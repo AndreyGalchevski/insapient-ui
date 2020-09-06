@@ -24,7 +24,7 @@ function Checkout() {
     city: {},
     address: '',
     zipCode: '',
-    cellphone: ''
+    cellphone: '',
   });
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function Checkout() {
       const data = await response.json();
       setCustomerInfo({
         ...customerInfo,
-        country: { value: data.country, label: data.country_name }
+        country: { value: data.country, label: data.country_name },
       });
     }
 
@@ -43,9 +43,9 @@ function Checkout() {
   useEffect(() => {
     async function fetchCountries() {
       const res = await fetchResources('countries');
-      const countryOptions = res.data.data.countries.map(c => ({
+      const countryOptions = res.data.data.countries.map((c) => ({
         label: c.name,
-        value: c.code
+        value: c.code,
       }));
       setCountries(countryOptions);
     }
@@ -56,9 +56,9 @@ function Checkout() {
   useEffect(() => {
     async function fetchCities(country) {
       const res = await fetchResources(`cities?country=${country}`);
-      const cityOptions = res.data.map(c => ({
+      const cityOptions = res.data.map((c) => ({
         label: c.name,
-        value: c._id
+        value: c._id,
       }));
       setCities(cityOptions);
     }
@@ -84,14 +84,14 @@ function Checkout() {
   function handleCountryChange(selectedCountry) {
     setCustomerInfo({
       ...customerInfo,
-      country: { value: selectedCountry.value, label: selectedCountry.label }
+      country: { value: selectedCountry.value, label: selectedCountry.label },
     });
   }
 
   function handleCityChange(selectedCity) {
     setCustomerInfo({
       ...customerInfo,
-      city: { value: selectedCity.value, label: selectedCity.label }
+      city: { value: selectedCity.value, label: selectedCity.label },
     });
   }
 
@@ -111,32 +111,32 @@ function Checkout() {
       return;
     }
 
-    const items = cart.items.map(item => ({
+    const items = cart.items.map((item) => ({
       name: `${item.name} ${item.type}`,
       sku: item.sku,
       price: item.price,
       size: item.size,
       currency: 'USD',
-      quantity: item.quantity
+      quantity: item.quantity,
     }));
 
     const transaction = {
       item_list: {
-        items
+        items,
       },
       amount: {
         currency: 'USD',
-        total: cart.total
+        total: cart.total,
       },
-      description: 'Payment for official Insapient band merchandise'
+      description: 'Payment for official Insapient band merchandise',
     };
     const order = {
       transaction,
       customerInfo: {
         ...customerInfo,
         country: customerInfo.country.value,
-        city: customerInfo.city.label
-      }
+        city: customerInfo.city.label,
+      },
     };
     setLoading(true);
     const res = await createResource('orders', order);

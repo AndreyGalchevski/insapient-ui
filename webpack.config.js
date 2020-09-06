@@ -6,53 +6,53 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: './src/index.js',
   output: {
-    publicPath: '/'
+    publicPath: '/',
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 4000,
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         },
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.html$/,
         use: {
-          loader: 'html-loader'
-        }
+          loader: 'html-loader',
+        },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      filename: './index.html'
+      filename: './index.html',
     }),
     new CompressionPlugin({
       algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
-      minRatio: 0.8
+      minRatio: 0.8,
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, './_redirects'),
-          to: path.resolve(__dirname, './dist')
-        }
-      ]
-    })
-  ]
+          to: path.resolve(__dirname, './dist'),
+        },
+      ],
+    }),
+  ],
 };

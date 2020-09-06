@@ -10,7 +10,7 @@ export const initialState = {
         (acc, item) => acc + item.price * item.quantity,
         0
       )
-    : 0
+    : 0,
 };
 
 export function reducer(state, action) {
@@ -21,18 +21,18 @@ export function reducer(state, action) {
         ...state,
         items: [...state.items, action.payload],
         count: state.count + action.payload.quantity,
-        total: state.total + action.payload.price * action.payload.quantity
+        total: state.total + action.payload.price * action.payload.quantity,
       };
     case types.DELETE_ITEM_FROM_CART:
       localStorage.setItem(
         'cart',
-        JSON.stringify(state.items.filter(item => item.id !== action.payload.id))
+        JSON.stringify(state.items.filter((item) => item.id !== action.payload.id))
       );
       return {
         ...state,
-        items: state.items.filter(item => item.id !== action.payload.id),
+        items: state.items.filter((item) => item.id !== action.payload.id),
         count: state.count - action.payload.quantity,
-        total: state.total - action.payload.price * action.payload.quantity
+        total: state.total - action.payload.price * action.payload.quantity,
       };
     case types.CLEAR_CART:
       localStorage.removeItem('cart');
@@ -40,7 +40,7 @@ export function reducer(state, action) {
         ...state,
         items: [],
         count: 0,
-        total: 0
+        total: 0,
       };
     default:
       return state;

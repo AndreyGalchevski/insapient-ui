@@ -26,11 +26,11 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 Input.defaultProps = {
-  disabled: false
+  disabled: false,
 };
 
 export default Input;
