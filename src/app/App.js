@@ -43,10 +43,10 @@ function App() {
           <Route exact path="/songs" component={Songs} />
           <Route exact path="/videos" component={Videos} />
           <Route exact path="/merch" component={Merch} />
-          <Route exact path="/merch-details/:id" component={MerchDetails} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/successful-order" component={SuccessfulOrder} />
+          {/* <Route exact path="/merch-details/:id" component={MerchDetails} /> */}
+          {/* <Route exact path="/cart" component={Cart} /> */}
+          {/* <Route exact path="/checkout" component={Checkout} /> */}
+          {/* <Route exact path="/successful-order" component={SuccessfulOrder} /> */}
           <Route exact path="/privacy-policy" component={PrivacyPolicy} />
           <Footer />
         </Suspense>

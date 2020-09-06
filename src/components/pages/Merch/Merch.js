@@ -22,29 +22,44 @@ function Merch() {
     fetchMerch();
   }, []);
 
+  // return (
+  //   <section className="merches">
+  //     <Loader isLoading={isLoading}>
+  //       <Header pageTitle="Merch" />
+  //       <div className="merches-container">
+  //         {items.map(item => (
+  //           <div className="merch" key={item._id}>
+  //             <img src={item.image} alt="" />
+  //             <div className="merch-info">
+  //               <HalfwayFab>
+  //                 <Link to={`merch-details/${item._id}`}>
+  //                   <i className="fas fa-ellipsis-h"></i>
+  //                 </Link>
+  //               </HalfwayFab>
+  //               <p>{item.name}</p>
+  //               <p>{item.type}</p>
+  //               <p>{item.price} USD</p>
+  //             </div>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     </Loader>
+  //   </section>
+  // );
+
   return (
-    <section className="merches">
-      <Loader isLoading={isLoading}>
-        <Header pageTitle="Merch" />
-        <div className="merches-container">
-          {items.map(item => (
-            <div className="merch" key={item._id}>
-              <img src={item.image} alt="" />
-              <div className="merch-info">
-                <HalfwayFab>
-                  <Link to={`merch-details/${item._id}`}>
-                    <i className="fas fa-ellipsis-h"></i>
-                  </Link>
-                </HalfwayFab>
-                <p>{item.name}</p>
-                <p>{item.type}</p>
-                <p>{item.price} USD</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Loader>
-    </section>
+    <div
+      style={{
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        paddingBottom: 70,
+      }}
+    >
+      <h3>Coming soon...</h3>
+    </div>
   );
 }
 

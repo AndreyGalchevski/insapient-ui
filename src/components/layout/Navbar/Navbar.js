@@ -15,7 +15,7 @@ function Navbar() {
 
   useEffect(() => {
     const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(navItem => {
+    navItems.forEach((navItem) => {
       navItem.addEventListener('click', () => {
         toggleSideNav();
       });
@@ -57,12 +57,12 @@ function Navbar() {
         <li className="nav-item">
           <NavLink to="/merch">Merch</NavLink>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <NavLink to="/cart">
             Cart
             {cart.count > 0 && <span> ({cart.count})</span>}
           </NavLink>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
